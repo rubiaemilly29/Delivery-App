@@ -16,7 +16,7 @@ function Login() {
             name="loginInput"
             placeholder="email@trybeer.com.br"
             data-testid="common_login__input-email"
-            onChange={ ({ target }) => setEmail(target.value) }
+            // onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
         <label htmlFor="passwordInput">
@@ -26,7 +26,7 @@ function Login() {
             name="passwordInput"
             placeholder="***********"
             data-testid="common_login__input-password"
-            onChange={ ({ target }) => setPassword(target.value) }
+            // onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
         <button
