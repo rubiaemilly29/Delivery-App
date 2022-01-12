@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
+import { loginUser } from '../services/user';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,9 +9,14 @@ function Login() {
   const [isDisable, setIsDisable] = useState(true);
   const [errorMsg, setErrorMsg] = useState(false);
 
-  const handleClickLogin = (user) => {
+  const setToken = (token) => {
+    localStorage.setItem('user', JSON.stringify(token));
+  };
+
+  const handleClickLogin = async (user) => {
     if (!user.email || !user.password) setErrorMsg(true);
-    // const { data } = await loginUser({ email, password });
+    const { data } = await loginUser({ email, password });
+    setToken(data);
   };
 
   useEffect(() => {
