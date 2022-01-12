@@ -1,39 +1,36 @@
 'use strict';
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Sales', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      total_price: {
-        type: Sequelize.STRING
-      },
-      delivery_address: {
-        type: Sequelize.STRING
-      },
-      delivery_number: {
-        type: Sequelize.STRING
-      },
-      sale_date: {
-        type: Sequelize.STRING
-      },
-      status: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+
+module.exports = (sequelize, DataTypes) => {
+  const Sale = sequelize.define('Sale', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    user_id: DataTypes.INTEGER,
+    seller_id: DataTypes.INTEGER,
+    total_price: DataTypes.DECIMAL(9, 2),
+    delivery_address: DataTypes.STRING(100),
+    delivery_number: DataTypes.STRING(50),
+    sale_date: DataTypes.DATE,
+    status: DataTypes.STRING(50),
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Sales');
-  }
+  {
+    tableName: 'sales',
+    timestamps: false,
+  });
+
+  Sale.associate = (models) => {
+    Sale.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
+    });
+
+    Sale.belongsTo(models.User, {
+      foreignKey: 'seller_id',
+      as: 'seller',
+    });
+
+    Sale.belongsToMany(models.Product, {
+      through: models.SaleProduct, foreignKey: 'sale_id', as: 'products',
+    });
+  };
+
+  return Sale;
 };

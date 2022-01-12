@@ -33,7 +33,7 @@ function Login() {
           type="button"
           data-testid="common_login__button-login"
           // disabled={ isDisable }
-          onClick={ ({ target }) => handleClickLogin(target.value) }
+          // onClick={ ({ target }) => handleClickLogin(target.value) }
         >
           LOGIN
         </button>
