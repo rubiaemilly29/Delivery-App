@@ -29,13 +29,13 @@ export const getAllUsers = () => {
 //   }
 // };
 
-// export const createUser = (user) => {
-//   try {
-//     return axios.post(`${API_URL}register`, user);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const createUser = (user) => {
+  try {
+    return axios.post(`${API_URL}register`, user);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const admimCreateUser = async (user, hasToken) => {
 //   try {

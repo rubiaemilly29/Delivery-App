@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
 import { loginUser } from '../services/user';
+import Context from '../context/Context';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
-  const [errorMsg, setErrorMsg] = useState(false);
   const history = useHistory();
+  const { errorMsg, setErrorMsg } = useContext(Context);
 
   const setToken = (token) => {
     localStorage.setItem('user', JSON.stringify(token));
@@ -82,7 +83,9 @@ function Login() {
           type="button"
           data-testid="common_login__button-register"
         >
-          Ainda não tenho conta
+          <Link to="/register">
+            Ainda não tenho conta
+          </Link>
         </button>
         { errorMsg ? <ErrorLogin /> : '' }
       </form>
