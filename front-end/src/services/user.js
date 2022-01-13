@@ -10,25 +10,6 @@ export const loginUser = (login) => {
   }
 };
 
-// export const createUser = (user) => {
-//   try {
-//     return axios.post(`${API_URL}register`, user);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// export const admimCreateUser = async (user, hasToken) => {
-//   try {
-//     const result = await axios.post(`${API_URL}register/administrator`,
-//       user,
-//       { headers: { authorization: hasToken } });
-//     return result;
-//   } catch (error) {
-//     return console.log(error);
-//   }
-// };
-
 export const getAllUsers = () => {
   try {
     return axios.get(`${API_URL}login/users`);
@@ -45,5 +26,24 @@ export const getAllUsers = () => {
 //     } });
 //   } catch (err) {
 //     console.log(err);
+//   }
+// };
+
+// export const createUser = (user) => {
+//   try {
+//     return axios.post(`${API_URL}register`, user);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// export const admimCreateUser = async (user, hasToken) => {
+//   try {
+//     const result = await axios.post(`${API_URL}register/administrator`,
+//       user,
+//       { headers: { authorization: hasToken } });
+//     return result;
+//   } catch (error) {
+//     return console.log(error);
 //   }
 // };

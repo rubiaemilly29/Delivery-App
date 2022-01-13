@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
 import { loginUser } from '../services/user';
@@ -8,15 +9,22 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
   const [errorMsg, setErrorMsg] = useState(false);
+  const history = useHistory();
 
   const setToken = (token) => {
     localStorage.setItem('user', JSON.stringify(token));
   };
 
-  const handleClickLogin = async (user) => {
-    if (!user.email || !user.password) setErrorMsg(true);
-    const { data } = await loginUser({ email, password });
-    setToken(data);
+  const handleClickLogin = async () => {
+    if (!email || !password) setErrorMsg(true);
+    try {
+      const { data } = await loginUser({ email, password });
+      setToken(data);
+      history.push({ pathname: '/customer/products' });
+    } catch (err) {
+      console.log(err);
+      setErrorMsg(true);
+    }
   };
 
   useEffect(() => {
@@ -66,7 +74,7 @@ function Login() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ isDisable }
-          onClick={ ({ target }) => handleClickLogin(target.value) }
+          onClick={ () => handleClickLogin() }
         >
           LOGIN
         </button>
