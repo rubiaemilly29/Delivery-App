@@ -19,13 +19,9 @@ function Provider({ children }) {
 
   const states = {
     value,
-    email,
-    password,
     errorMsg,
     users,
     setValue,
-    setEmail,
-    setPassword,
     setErrorMsg,
     setUsers,
     getUsers,

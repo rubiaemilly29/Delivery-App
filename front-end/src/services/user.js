@@ -30,6 +30,7 @@ export const getAllUsers = () => {
 // };
 
 export const createUser = (user) => {
+  console.log('entrei no createUser');
   try {
     return axios.post(`${API_URL}register`, user);
   } catch (error) {

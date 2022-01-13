@@ -7,21 +7,20 @@ import { createUser } from '../services/user';
 
 function Register() {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
   const history = useHistory();
 
   const {
-    email,
-    setEmail,
-    password,
-    setPassword,
+    errorMsg,
     setErrorMsg,
   } = useContext(Context);
 
   const handleClickRegister = async () => {
     try {
+      console.log('entrei no register');
       const create = await createUser({ name, email, password });
-      console.log(name);
       if (!create) return setErrorMsg(true);
       setToken(create.data);
       history.push({ pathname: '/customer/products' });
@@ -35,7 +34,6 @@ function Register() {
 
   useEffect(() => {
     const isValid = () => {
-      console.log(name);
       const validEmail = email.match(/^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/ig);
       const minLength = 5;
       const maxLength = 11;
@@ -59,7 +57,7 @@ function Register() {
         type="text"
         name="name"
         placeholder="Entre com um nome"
-        // onChange={ ({ target }) => setName(target.value) }
+        onChange={ ({ target }) => setName(target.value) }
       />
       <input
         data-testid="common_register__input-email"
@@ -83,7 +81,7 @@ function Register() {
       >
         Cadastrar
       </button>
-      <ErrorRegister />
+      { errorMsg ? <ErrorRegister /> : '' }
     </form>
   );
 }
