@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-// const path = require('path');
-// const { customerRouter } = require('../controllers/customer');
+const path = require('path');
+const { customerRouter } = require('../controllers/customer');
 const { registerRouter } = require('../controllers/register');
 const { userRouter } = require('../controllers/users');
 // const { sellerRouter } = require('../controllers/seller');
@@ -12,14 +12,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// const staticDestination = path.join(__dirname, '..', 'database', 'images');
-// app.use('/images', express.static(staticDestination));
+const staticDestination = path.join(__dirname, '..', 'database', 'images');
+app.use('/images', express.static(staticDestination));
 
 app.use('/login', userRouter);
 
 app.use('/register', registerRouter);
 
-// app.use('/customer', customerRouter);
+app.use('/customer', customerRouter);
 
 // app.use('/seller', sellerRouter);
 
