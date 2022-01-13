@@ -1,8 +1,8 @@
-const rescue = require("express-rescue");
-const md5 = require("md5");
-const { User } = require("../database/models");
+const rescue = require('express-rescue');
+const md5 = require('md5');
+const { User } = require('../database/models');
 
-const { getUserByEmail, getUserByName } = require("../services/users");
+const { getUserByEmail, getUserByName } = require('../services/users');
 
 const errors = {
   passwordWrong: '"password" is wrong',
@@ -26,7 +26,7 @@ const validatePassword = rescue(async (req, res, next) => {
 const validateUser = rescue(async (req, res, next) => {
   const { name, email, password } = req.body;
   const validEmail = email.match(
-    /^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/gi
+    /^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/gi,
   );
   const minLength = 5;
   const maxLength = 11;
@@ -52,11 +52,10 @@ const existsUser = rescue(async (req, res, next) => {
   const { name, email } = req.body;
 
   const findUserName = await getUserByName(name);
-  if (findUserName) return res.status(409).json({ message: "Nome já existe" });
+  if (findUserName) return res.status(409).json({ message: 'Nome já existe' });
 
   const findUserEmail = await getUserByEmail(email);
-  if (findUserEmail)
-    return res.status(409).json({ message: "Email já existe" });
+  if (findUserEmail) { return res.status(409).json({ message: 'Email já existe' }); }
 
   return next();
 });
