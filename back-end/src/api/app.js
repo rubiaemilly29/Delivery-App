@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 // const path = require('path');
 // const { customerRouter } = require('../controllers/customer');
-// const { registerRouter } = require('../controllers/register');
+const { registerRouter } = require('../controllers/register');
 const { userRouter } = require('../controllers/users');
 // const { sellerRouter } = require('../controllers/seller');
 // const { administratorRouter } = require('../controllers/administrator');
@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use('/login', userRouter);
 
-// app.use('/register', registerRouter);
+app.use('/register', registerRouter);
 
 // app.use('/customer', customerRouter);
 
