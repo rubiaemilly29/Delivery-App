@@ -1,31 +1,31 @@
 const md5 = require('md5');
-// const generateToken = require('../auth/generateToken');
+const generateToken = require('../auth/generateToken');
 const { User } = require('../database/models');
 
-// const getUserByEmail = async (email) => { 
-//   const user = await User.findOne({ where: { email } });
-//   return user;
-// };
+const getUserByEmail = async (email) => { 
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
 
-// const getUserByName = async (name) => {
-//   const user = await User.findOne({ where: { name } });
-//   return user;
-// };
+const getUserByName = async (name) => {
+  const user = await User.findOne({ where: { name } });
+  return user;
+};
 
-// const createUser = async ({ name, email, password, role }) => {
-//   const user = await User.create({ name, email, password, role });
-//   const token = generateToken(user.dataValues);
-//   return { name, email, token, role };
-// };
+const createUser = async ({ name, email, password, role }) => {
+  const user = await User.create({ name, email, password, role });
+  const token = generateToken(user.dataValues);
+  return { name, email, token, role };
+};
 
 const loginUser = async ({ email, password }) => {
   const hashedPassword = md5(password);
   const user = await User.findOne({ where: { email, password: hashedPassword } });
   if (user === null) return { message: 'Usuário não encontrado' };
 
-  const { name, role } = user.dataValues; // adicionar id
-  // const token = generateToken({ id, name, email, role });
-  return { name, email, role }; // adicionar token
+  const { id, name, role } = user.dataValues;
+  const token = generateToken({ id, name, email, role });
+  return { name, email, role, token };
 };
 
 const getAllUser = async () => {
@@ -40,10 +40,10 @@ const getAllUser = async () => {
 // };
   
 module.exports = {
-  // getUserByEmail,
-  // getUserByName,
+  getUserByEmail,
+  getUserByName,
   getAllUser,
-  // createUser,
+  createUser,
   // deleteUser,
   loginUser,
 };
