@@ -1,5 +1,4 @@
 const http = require('http');
-// const { updateSale } = require('../services/sales');
 const app = require('./app');
 
 const httpServer = http.createServer(app);
