@@ -1,14 +1,14 @@
 const express = require('express');
-// const rescue = require('express-rescue');
-// const { validateToken } = require('../middlewares/tokenMiddleware');
+const rescue = require('express-rescue');
+const { validateToken } = require('../middlewares/tokenMiddleware');
 const { getProducts } = require('../services/products');
-// const {
-//   createSale,
-//   createSaleProduct,
-//   getSaleById,
-//   getAllSales,
-//   updateSale,
-// } = require('../services/sales');
+const {
+  createSale,
+  createSaleProduct,
+  getSaleById,
+  getAllSales,
+  updateSale,
+} = require('../services/sales');
 
 const customerRouter = express.Router();
 
@@ -43,23 +43,24 @@ customerRouter.get('/products', async (req, res) => {
 //   }
 // });
 
-// customerRouter.get(
-//   '/orders/:id',
-//   rescue(async (req, res) => {
-//     const { id } = req.params;
-//     const sale = await getSaleById(id);
-//     return res.status(200).json(sale);
-//   }),
-// );
+customerRouter.get(
+  '/orders/:id',
+  rescue(async (req, res) => {
+    const { id } = req.params;
+    const sale = await getSaleById(id);
+    return res.status(200).json(sale);
+  }),
+);
 
-// customerRouter.get(
-//   '/orders',
-//   rescue(async (_req, res) => {
-//     const orders = await getAllSales();
+customerRouter.get(
+  '/orders',
+  rescue(async (_req, res) => {
+    console.log('entrei no back custome/orders');
+    const orders = await getAllSales();
 
-//     return res.status(200).json(orders);
-//   }),
-// );
+    return res.status(200).json(orders);
+  }),
+);
 
 // customerRouter.put('/orders/update', rescue(async (req, res) => {
 //     const { id, status } = req.body;
