@@ -35,6 +35,7 @@ function Login() {
       const validPassword = password.length >= minLength;
       if (validEmail) {
         if (validPassword) {
+          console.log(password);
           setIsDisable(false);
         }
       } else {

@@ -15,6 +15,7 @@ export const getOrders = async () => {
   console.log('entrei no getOrders');
   try {
     const respostas = await axios.get(`${API_URL}customer/orders`);
+    console.log(respostas);
     return respostas;
   } catch (err) {
     console.log(err);

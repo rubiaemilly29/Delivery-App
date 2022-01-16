@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CardOrder from '../components/CardOrder';
 import NavBar from '../components/NavBar';
 import { getOrders } from '../services/customer';
@@ -12,21 +12,26 @@ const arrayOrder = [
     total_price: 23.80,
     delivery_address: 'rua tatata',
   },
-  {
-    id: 2,
-    delivery_number: 2,
-    status: 'entregue',
-    sale_data: '08/04/21',
-    total_price: 23.80,
-    delivery_address: 'rua tatata',
-  }];
+];
 export default function SellerOrders() {
-  const dataOrder = getOrders();
-  console.log(dataOrder);
+  const [loading, setLoading] = useState(true);
+  const [dataOrder, setDataOrder] = useState('');
+
+  async function customerData() {
+    const { data } = await getOrders();
+    data.push(arrayOrder[0]);
+    setDataOrder(data);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    customerData();
+  }, []);
+
   return (
     <div>
       <NavBar />
-      {arrayOrder.map((orderData) => (
+      {loading ? <h5>Carregando...</h5> : dataOrder.map((orderData) => (
         <CardOrder key={ orderData.id } orderData={ orderData } />))}
     </div>
   );
