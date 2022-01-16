@@ -1,35 +1,30 @@
-'use strict';
-
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define('Sale', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id: DataTypes.INTEGER,
-    seller_id: DataTypes.INTEGER,
-    total_price: DataTypes.DECIMAL(9, 2),
-    delivery_address: DataTypes.STRING(100),
-    delivery_number: DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
-    status: DataTypes.STRING(50),
+    userId: DataTypes.INTEGER,
+    sellerId: DataTypes.INTEGER,
+    totalPrice: DataTypes.DECIMAL(9, 2),
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    status: DataTypes.STRING,
   },
   {
     tableName: 'sales',
+    underscored: true,
     timestamps: false,
   });
 
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, {
-      foreignKey: 'user_id',
+    models.Sale.belongsTo(models.User, {
+      foreignKey: 'userId',
       as: 'user',
     });
 
-    Sale.belongsTo(models.User, {
-      foreignKey: 'seller_id',
+    models.Sale.belongsTo(models.User, {
+      foreignKey: 'sellerId',
       as: 'seller',
     });
 
-    Sale.belongsToMany(models.Product, {
-      through: models.SaleProduct, foreignKey: 'sale_id', as: 'products',
-    });
   };
 
   return Sale;

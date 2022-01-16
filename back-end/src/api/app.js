@@ -4,7 +4,7 @@ const path = require('path');
 const { customerRouter } = require('../controllers/customer');
 const { registerRouter } = require('../controllers/register');
 const { userRouter } = require('../controllers/users');
-// const { sellerRouter } = require('../controllers/seller');
+const { sellerRouter } = require('../controllers/seller');
 // const { administratorRouter } = require('../controllers/administrator');
 
 const app = express();
@@ -21,7 +21,7 @@ app.use('/register', registerRouter);
 
 app.use('/customer', customerRouter);
 
-// app.use('/seller', sellerRouter);
+app.use('/seller', sellerRouter);
 
 // app.use('/admin', administratorRouter);
 

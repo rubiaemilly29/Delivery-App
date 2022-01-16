@@ -7,7 +7,6 @@ const key = 'jwt.evaluation.key';
 const SECRET = fs.readFileSync(key, 'utf8', (_e, data) => data).trim();
 
 const jwtConfiguration = {
-expiresIn: '1d',
 algorithm: 'HS256',
 };
 

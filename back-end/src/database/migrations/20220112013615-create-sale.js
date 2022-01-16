@@ -1,15 +1,25 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('sales', {
       id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
+        field: 'user_id',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      sellerId: {
+        type: Sequelize.INTEGER,
+        field: 'seller_id',
         allowNull: false,
         references: {
           model: 'users',
@@ -18,30 +28,25 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      seller_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      total_price: {
+      totalPrice: {
         type: Sequelize.DECIMAL(9, 2),
+        field: 'total_price',
         allowNull: false,
       },
-      delivery_address: {
+      deliveryAddress: {
         type: Sequelize.STRING,
+        field: 'delivery_address',
         allowNull: false,
       },
-      delivery_number: {
+      deliveryNumber: {
         type: Sequelize.STRING,
+        field: 'delivery_number',
         allowNull: false,
       },
-      sale_date: {
+      saleDate: {
         type: Sequelize.DATE,
+        field: 'sale_date',
+        defaultValue: Sequelize.NOW,
         allowNull: false,
       },
       status: {

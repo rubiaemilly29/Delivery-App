@@ -11,9 +11,13 @@ const validateToken = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) return res.status(401).json({ message: 'missing auth token' });
   try {
+    console.log('entrei no try');
     const { data } = jwt.verify(token, SECRET);
+    console.log('data:', data);
     const user = await getUserByName(data.name);
+    console.log('user:', user);
     req.user = user;
+    console.log('req.user:', req.user);
     next();
   } catch (error) {
     return res.status(401).json({ message: 'jwt malformed' });

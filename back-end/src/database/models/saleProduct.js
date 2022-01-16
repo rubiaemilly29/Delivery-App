@@ -3,9 +3,23 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
   },
   {
-    tableName: 'sale_products',
+    tableName: 'salesProducts',
+    underscored: true,
     timestamps: false,
   });
 
+  SaleProduct.associate = (models) => {
+    models.Sale.belongsToMany(models.Product, {
+      through: SaleProduct,
+      as: 'product',
+      foreignKey: 'saleId',
+    });
+    models.Product.belongsToMany(models.Sale, {
+      through: SaleProduct,
+      as: 'sale',
+      foreignKey: 'productId',
+    });
+  };
+  
   return SaleProduct;
 };
