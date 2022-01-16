@@ -88,7 +88,7 @@ function Card(props) {
             {`R$ ${price.replace(/\./, ',')}`}
           </h1>
           <img
-            src={ item.url_image }
+            src={ item.urlImage }
             alt="Descrição da Imagem"
             data-testid={ `customer_products__img-card-bg-image-${id}` }
             width="100px"
@@ -134,7 +134,7 @@ Card.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
-    url_image: PropTypes.string,
+    urlImage: PropTypes.string,
   }).isRequired,
 };
 
