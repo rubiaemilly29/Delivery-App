@@ -27,13 +27,14 @@ export const createOrders = async (order, token) => {
     const respostas = await axios.post(
       `${API_URL}customer/orders`,
       order,
-      { headers: { authorization: token } },
+      { headers: { Authorization: token } },
     );
     return respostas;
   } catch (err) {
     console.log(err);
   }
 };
+
 export const updateOrder = async (up) => {
   try {
     const respostas = await axios.put(`${API_URL}customer/orders/update`, up);

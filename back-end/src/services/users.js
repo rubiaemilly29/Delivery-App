@@ -34,16 +34,16 @@ const getAllUser = async () => {
   return filterUser;
 };
   
-// const deleteUser = async (id) => {
-//   const user = await User.destroy({ where: { id } });
-//   return user;
-// };
+const deleteUser = async (id) => {
+  const user = await User.destroy({ where: { id } });
+  return user;
+};
   
 module.exports = {
   getUserByEmail,
   getUserByName,
   getAllUser,
   createUser,
-  // deleteUser,
+  deleteUser,
   loginUser,
 };

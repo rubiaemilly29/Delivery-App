@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getAllUsers } from '../services/user';
 import getProducts from '../services/product';
+// import { getOrderById } from '../services/customer';
 import Context from './Context';
 
 function Provider({ children }) {
@@ -12,6 +13,15 @@ function Provider({ children }) {
   const [carrinho, setCarrinho] = useState({});
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [orderIdCheckout, setOrderIdCheckout] = useState(0);
+  // const [status, setStatus] = useState('');
+  // const [orderId, setOrderId] = useState([]);
+  // const [finished, setFinished] = useState(false);
+
+  // const getOrderId = async (id) => {
+  //   const { data: order } = await getOrderById(id);
+  //   setOrderId(order);
+  // };
 
   const getAllProducts = async () => {
     const { data: allProducts } = await getProducts();
@@ -36,13 +46,21 @@ function Provider({ children }) {
     carrinho,
     total,
     hidden,
+    orderIdCheckout,
+    // status,
+    // orderId,
+    // finished,
+    // setFinished,
+    // setStatus,
     setTotal,
     setHidden,
     setCarrinho,
     setValue,
     setErrorMsg,
     setUsers,
+    setOrderIdCheckout,
     getUsers,
+    // getOrderId,
   };
 
   return (

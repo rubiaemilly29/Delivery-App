@@ -5,31 +5,36 @@ const createSale = async ({
   sellerId,
   totalPrice,
   deliveryAddress,
-  deliveryNumber }) => {
+  deliveryNumber,
+  status }) => {
     const newSale = await Sale.create({
       userId,
       sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
+      status,
     });
+
     return newSale;
 };
-const createSaleProduct = async ({
-  saleId,
-  productId,
-  quantity }) => {
-    const newSaleProduct = await SaleProduct.create({
-      saleId,
-      productId,
-      quantity,
-    });
-    return newSaleProduct;
+
+const createSaleProduct = async ({ saleId, productId, quantity }) => {
+  const newSaleProduct = await SaleProduct.create({
+    saleId,
+    productId,
+    quantity,
+  });
+  console.log('newSaleProduct:', newSaleProduct);
+  return newSaleProduct;
 };
+
 const getSaleById = async (id) => {
   const sale = await Sale.findByPk(id, { include: { model: Product, as: 'products' } });
+
   return sale;
 };
+
 const getAllSales = async () => {
   const sales = await Sale.findAll({ include: { model: Product, as: 'products' } });
   return sales;
