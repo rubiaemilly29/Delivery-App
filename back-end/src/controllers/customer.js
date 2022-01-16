@@ -8,7 +8,7 @@ const {
   getSaleById,
   getAllSales,
   updateSale,
-} = require('../services/sales.js');
+} = require('../services/sales');
 
 const customerRouter = express.Router();
 
@@ -22,11 +22,9 @@ customerRouter.get('/products', async (req, res) => {
 });
 
 customerRouter.post('/orders', validateToken, async (req, res) => {
-  console.log('entrei na rota post/orders no controller');
   try {
     const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products, status } = req.body;
     const { id } = req.user;
-    console.log(sellerId);
     const newSale = await createSale({
       userId: id,
       sellerId,

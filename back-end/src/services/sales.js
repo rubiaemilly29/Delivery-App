@@ -20,17 +20,13 @@ const createSale = async ({
 };
 
 const createSaleProduct = async ({ saleId, productId, quantity }) => {
-  try {
-    const newSaleProduct = await SaleProduct.create({
-      saleId,
-      productId,
-      quantity,
-    });
-    console.log('newSaleProduct:', newSaleProduct);
-    return newSaleProduct;
-  } catch(err) {
-    console.log(err)
-  }
+  const newSaleProduct = await SaleProduct.create({
+    saleId,
+    productId,
+    quantity,
+  });
+  console.log('newSaleProduct:', newSaleProduct);
+  return newSaleProduct;
 };
 
 const getSaleById = async (id) => {

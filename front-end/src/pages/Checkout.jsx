@@ -40,7 +40,7 @@ function Checkout() {
 
   const newOrders = async ({
     sellerId, totalPrice, deliveryAddress, deliveryNumber, products, status },
-  token) => {
+    token) => {
     const created = await createOrders({
       sellerId, totalPrice, deliveryAddress, deliveryNumber, status, products,
     }, token);
