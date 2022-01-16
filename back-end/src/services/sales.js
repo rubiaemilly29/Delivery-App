@@ -1,4 +1,5 @@
 const { Sale, SaleProduct, Product } = require('../database/models');
+
 const createSale = async ({
   userId,
   sellerId,
@@ -37,6 +38,7 @@ const updateSale = async (id, update) => {
   const sale = await Sale.update({ status: update }, { where: { id } });
   return sale;
 };
+
 module.exports = {
   createSale,
   createSaleProduct,

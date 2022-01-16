@@ -1,13 +1,13 @@
 const express = require('express');
 const rescue = require('express-rescue');
-const { validateToken } = require('../middlewares/tokenMiddleware');
+// const { validateToken } = require('../middlewares/tokenMiddleware');
 const { getProducts } = require('../services/products');
 const {
-  createSale,
-  createSaleProduct,
+  // createSale,
+  // createSaleProduct,
   getSaleById,
   getAllSales,
-  updateSale,
+  // updateSale,
 } = require('../services/sales');
 
 const customerRouter = express.Router();
