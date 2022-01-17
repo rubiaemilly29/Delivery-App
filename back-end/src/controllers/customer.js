@@ -54,9 +54,8 @@ customerRouter.get(
   }),
 );
 
-customerRouter.get(
-  '/orders',
-  rescue(async (_req, res) => {
+customerRouter.get('/orders', rescue(async (_req, res) => {
+  console.log('estou no controller');
     const orders = await getAllSales();
 
     return res.status(200).json(orders);

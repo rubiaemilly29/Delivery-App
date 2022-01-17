@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getAllUsers } from '../services/user';
+import { getAllUsers, loginUser } from '../services/user';
 import getProducts from '../services/product';
 // import { getOrderById } from '../services/customer';
 import Context from './Context';
@@ -14,6 +15,8 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderIdCheckout, setOrderIdCheckout] = useState(0);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   // const [status, setStatus] = useState('');
   // const [orderId, setOrderId] = useState([]);
   // const [finished, setFinished] = useState(false);
@@ -22,6 +25,24 @@ function Provider({ children }) {
   //   const { data: order } = await getOrderById(id);
   //   setOrderId(order);
   // };
+
+  const setToken = (token) => {
+    localStorage.setItem('user', JSON.stringify(token));
+  };
+
+  const history = useHistory();
+  const handleClickLogin = async () => {
+    if (!email || !password) setErrorMsg(true);
+    console.log(history);
+    try {
+      const { data } = await loginUser({ email, password });
+      setToken(data);
+      history.push({ pathname: '/customer/products' });
+    } catch (err) {
+      console.log(err);
+      setErrorMsg(true);
+    }
+  };
 
   const getAllProducts = async () => {
     const { data: allProducts } = await getProducts();
@@ -47,11 +68,15 @@ function Provider({ children }) {
     total,
     hidden,
     orderIdCheckout,
+    email,
+    password,
     // status,
     // orderId,
     // finished,
     // setFinished,
     // setStatus,
+    setEmail,
+    setPassword,
     setTotal,
     setHidden,
     setCarrinho,
@@ -60,6 +85,7 @@ function Provider({ children }) {
     setUsers,
     setOrderIdCheckout,
     getUsers,
+    handleClickLogin,
     // getOrderId,
   };
 

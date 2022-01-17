@@ -6,6 +6,10 @@ function CardOrder(prop) {
   const { orderData: data } = prop;
   const { location } = history;
 
+  const dataInput = new Date(data.saleDate);
+
+  const dataFormatada = dataInput.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
   const cardOrderClient = (path) => {
     if (location.pathname.includes(path)) {
       const customerProducts = 'customer_products__element-order-date-';
@@ -30,10 +34,10 @@ function CardOrder(prop) {
             </div>
             <div>
               <p id="data" data-testid={ `${customerProducts}35` }>
-                {data.sale_data}
+                {dataFormatada}
               </p>
               <p id="preco">
-                { data.total_price }
+                { `R$ ${data.totalPrice}` }
               </p>
             </div>
           </div>

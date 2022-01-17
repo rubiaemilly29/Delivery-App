@@ -1,32 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
-import { loginUser } from '../services/user';
 import Context from '../context/Context';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
-  const history = useHistory();
-  const { errorMsg, setErrorMsg } = useContext(Context);
-
-  const setToken = (token) => {
-    localStorage.setItem('user', JSON.stringify(token));
-  };
-
-  const handleClickLogin = async () => {
-    if (!email || !password) setErrorMsg(true);
-    try {
-      const { data } = await loginUser({ email, password });
-      setToken(data);
-      history.push({ pathname: '/customer/products' });
-    } catch (err) {
-      console.log(err);
-      setErrorMsg(true);
-    }
-  };
+  const user = localStorage.getItem('user');
+  const {
+    errorMsg, handleClickLogin, email, password, setEmail, setPassword,
+  } = useContext(Context);
 
   useEffect(() => {
     const isValid = () => {
@@ -35,7 +18,6 @@ function Login() {
       const validPassword = password.length >= minLength;
       if (validEmail) {
         if (validPassword) {
-          console.log(password);
           setIsDisable(false);
         }
       } else {
@@ -45,7 +27,7 @@ function Login() {
     isValid();
   }, [email, password, setIsDisable]);
 
-  return (
+  return user ? <Redirect to="/customer/products" /> : (
     <>
       <span className="logo">TRYBE</span>
       <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
