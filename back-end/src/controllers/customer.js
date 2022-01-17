@@ -35,9 +35,6 @@ customerRouter.post('/orders', validateToken, async (req, res) => {
     });
     // Comments: Chama Service SaleProducts solicitando registro na base dos produtos associados à saleId
     products.forEach(async ({ id: productId, quantity }) => {
-      // console.log('products:', products);
-      // console.log('productId:', productId);
-      // console.log('quantity:', quantity);
       console.log('estou inserindo no banco na tabela salesProducts');
       await createSaleProduct({ saleId: newSale.id, productId, quantity });
     });
@@ -57,14 +54,12 @@ customerRouter.get(
   }),
 );
 
-customerRouter.get(
-  '/orders',
-  rescue(async (_req, res) => {
+customerRouter.get('/orders', rescue(async (_req, res) => {
+  console.log('estou no controller');
     const orders = await getAllSales();
 
     return res.status(200).json(orders);
-  }),
-);
+  }));
 
 customerRouter.put('/orders/update', rescue(async (req, res) => {
     const { id, status } = req.body;

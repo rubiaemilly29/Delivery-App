@@ -39,7 +39,6 @@ const getAllSales = async () => {
   const sales = await Sale.findAll({ include: { model: Product, as: 'products' } });
   return sales;
 };
-
 const updateSale = async (id, update) => {
   const sale = await Sale.update({ status: update }, { where: { id } });
   return sale;
