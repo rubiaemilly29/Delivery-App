@@ -17,6 +17,7 @@ function Provider({ children }) {
   const [orderIdCheckout, setOrderIdCheckout] = useState(0);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [sales, setSales] = useState([]);
 
   const setToken = (token) => {
     localStorage.setItem('user', JSON.stringify(token));
@@ -62,6 +63,8 @@ function Provider({ children }) {
     orderIdCheckout,
     email,
     password,
+    sales,
+    setSales,
     setEmail,
     setPassword,
     setTotal,

@@ -59,8 +59,7 @@ customerRouter.get('/orders', rescue(async (_req, res) => {
     const orders = await getAllSales();
 
     return res.status(200).json(orders);
-  }),
-);
+  }));
 
 customerRouter.put('/orders/update', rescue(async (req, res) => {
     const { id, status } = req.body;

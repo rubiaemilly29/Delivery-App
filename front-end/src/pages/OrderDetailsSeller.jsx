@@ -27,7 +27,7 @@ function OrderDetails(props) {
   }, [sale.status]);
 
   const { products } = sale;
-  const dataTestids = 'customer_order_details__element-order-';
+  const dataTestids = 'seller_order_details__element-order-';
 
   return loading ? 'Carregando' : (
     <div>
@@ -50,11 +50,19 @@ function OrderDetails(props) {
         </p>
         <button
           type="button"
-          data-testid="customer_order_details__button-delivery-check"
-          disabled={ sale.status !== 'Em Trânsito' }
-          onClick={ () => handleClick('Entregue') }
+          data-testid="seller_order_details__button-preparing-check"
+          disabled={ sale.status !== 'Pendente' }
+          onClick={ () => handleClick('Preparando') }
         >
-          Marcar como entregue
+          Preparar pedido
+        </button>
+        <button
+          type="button"
+          data-testid="seller_order_details__button-dispatch-check"
+          disabled={ sale.status !== 'Preparando' }
+          onClick={ () => handleClick('Em Trânsito') }
+        >
+          Saiu para Entrega
         </button>
       </div>
       <table>
@@ -99,7 +107,7 @@ function OrderDetails(props) {
         })}
       </table>
       <h2 data-testid={ `${dataTestids}total-price` }>
-        {`Total: R$${sale.totalPrice.replace(/\./, ',')}`}
+        { sale.totalPrice.replace(/\./, ',') }
       </h2>
     </div>
   );
