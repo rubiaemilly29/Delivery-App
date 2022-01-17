@@ -17,14 +17,6 @@ function Provider({ children }) {
   const [orderIdCheckout, setOrderIdCheckout] = useState(0);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [status, setStatus] = useState('');
-  // const [orderId, setOrderId] = useState([]);
-  // const [finished, setFinished] = useState(false);
-
-  // const getOrderId = async (id) => {
-  //   const { data: order } = await getOrderById(id);
-  //   setOrderId(order);
-  // };
 
   const setToken = (token) => {
     localStorage.setItem('user', JSON.stringify(token));
@@ -70,11 +62,6 @@ function Provider({ children }) {
     orderIdCheckout,
     email,
     password,
-    // status,
-    // orderId,
-    // finished,
-    // setFinished,
-    // setStatus,
     setEmail,
     setPassword,
     setTotal,
@@ -86,7 +73,6 @@ function Provider({ children }) {
     setOrderIdCheckout,
     getUsers,
     handleClickLogin,
-    // getOrderId,
   };
 
   return (

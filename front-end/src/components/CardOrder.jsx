@@ -5,7 +5,6 @@ function CardOrder(prop) {
   const history = useHistory();
   const { orderData: data } = prop;
   const { location } = history;
-
   const dataInput = new Date(data.saleDate);
 
   const dataFormatada = dataInput.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
@@ -18,7 +17,7 @@ function CardOrder(prop) {
         <Link
           to={ `/customer/orders/${data.id}` }
         >
-          <div>
+          <>
             <p
               id="pedido"
               data-testid={ `${customerProducts}33` }
@@ -27,20 +26,16 @@ function CardOrder(prop) {
               <br />
               {data.id}
             </p>
-          </div>
-          <div>
-            <div data-testid={ `${customerProducts}34` }>
+            <p data-testid={ `${customerProducts}34` }>
               {data.status.toUpperCase()}
-            </div>
-            <div>
-              <p id="data" data-testid={ `${customerProducts}35` }>
-                {dataFormatada}
-              </p>
-              <p id="preco">
-                { `R$ ${data.totalPrice}` }
-              </p>
-            </div>
-          </div>
+            </p>
+            <p id="data" data-testid={ `${customerProducts}35` }>
+              {dataFormatada}
+            </p>
+            <p id="preco">
+              { `R$ ${data.totalPrice}` }
+            </p>
+          </>
         </Link>
       );
     }
