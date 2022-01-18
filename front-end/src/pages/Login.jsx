@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useHistory/* Redirect */ } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
 import Context from '../context/Context';
@@ -7,7 +7,7 @@ import Context from '../context/Context';
 function Login() {
   const history = useHistory();
   const [isDisable, setIsDisable] = useState(true);
-  /* const user = localStorage.getItem('user'); */
+  const user = localStorage.getItem('user');
   const {
     errorMsg, handleClickLogin, email, password, setEmail, setPassword,
   } = useContext(Context);
@@ -28,7 +28,7 @@ function Login() {
     isValid();
   }, [email, password, setIsDisable]);
 
-  return /* user ? <Redirect to="/customer/products" /> : */ (
+  return user ? <Redirect to="/customer/products" /> : (
     <>
       <span className="logo">TRYBE</span>
       <p>
