@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
 import Context from '../context/Context';
 
 function Login() {
+  const history = useHistory();
   const [isDisable, setIsDisable] = useState(true);
   const user = localStorage.getItem('user');
   const {
@@ -30,6 +31,9 @@ function Login() {
   return user ? <Redirect to="/customer/products" /> : (
     <>
       <span className="logo">TRYBE</span>
+      <p>
+        e-mail fulana@deliveryapp.com e senha fulana@123
+      </p>
       <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
         Glass
       </object>
@@ -58,7 +62,7 @@ function Login() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ isDisable }
-          onClick={ () => handleClickLogin() }
+          onClick={ () => handleClickLogin(history) }
         >
           LOGIN
         </button>

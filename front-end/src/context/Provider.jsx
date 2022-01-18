@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getAllUsers, loginUser } from '../services/user';
 import getProducts from '../services/product';
@@ -23,14 +22,27 @@ function Provider({ children }) {
     localStorage.setItem('user', JSON.stringify(token));
   };
 
-  const history = useHistory();
-  const handleClickLogin = async () => {
+  const handleClickLogin = async (history) => {
     if (!email || !password) setErrorMsg(true);
-    console.log(history);
+
     try {
       const { data } = await loginUser({ email, password });
-      setToken(data);
-      history.push({ pathname: '/customer/products' });
+      console.log(history);
+      if (data.role === 'customer') {
+        setToken(data);
+        return history.push({ pathname: '/customer/products' });
+      }
+      if (data.role === 'administrator') {
+        setToken(data);
+        history.push({ pathname: '/admin/manage' });
+      }
+
+      if (data.role === 'seller') {
+        console.log('entrou em seller');
+        setToken(data);
+        console.log(history);
+        return history.push({ pathname: '/seller/orders' });
+      }
     } catch (err) {
       console.log(err);
       setErrorMsg(true);
