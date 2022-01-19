@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import NavBar from '../components/NavBar';
-import { getOrderById } from '../services/customer';
+import { getOrderById, updateOrder } from '../services/customer';
 
 const socket = io('http://localhost:3001');
 
@@ -17,8 +17,12 @@ function OrderDetails(props) {
   });
 
   if (sale.sellerId === 2) sale.sellerId = 'Fulana Pereira';
-  const handleClick = (status) => {
-    setSale({ ...sale, status });
+  const handleClick = async (status) => {
+    const newSale = { ...sale, status };
+    setSale(newSale);
+    socket.emit('sale', newSale);
+    const newOrder = { id: sale.id, status };
+    await updateOrder(newOrder);
   };
 
   useEffect(() => {
