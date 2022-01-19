@@ -9,7 +9,6 @@ const registerRouter = express.Router();
 
 registerRouter.post('/', existsUser, rescue(async (req, res) => {
   const { name, email, password } = req.body;
-  console.log('entrei no regiterRoute (back)');
   const newUser = await createUser({ name, email, password: md5(password), role: 'customer' });
 
   return res.status(201).json(newUser);

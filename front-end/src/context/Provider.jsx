@@ -27,7 +27,6 @@ function Provider({ children }) {
 
     try {
       const { data } = await loginUser({ email, password });
-      console.log(history);
       if (data.role === 'customer') {
         setToken(data);
         return history.push({ pathname: '/customer/products' });
@@ -40,7 +39,6 @@ function Provider({ children }) {
       if (data.role === 'seller') {
         console.log('entrou em seller');
         setToken(data);
-        console.log(history);
         return history.push({ pathname: '/seller/orders' });
       }
     } catch (err) {

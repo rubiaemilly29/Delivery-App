@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 import NavBar from '../components/NavBar';
 import { getOrderById } from '../services/customer';
+
+const socket = io('http://localhost:3001');
 
 function OrderDetails(props) {
   const [sale, setSale] = useState({});
   const [loading, setLoading] = useState(true);
   const { match: { params: { id } } } = props;
+  console.log('sale=================================>>>>', sale);
+  socket.on('sale', (newSale) => {
+    console.log(newSale);
+    if (newSale !== undefined) setSale(newSale);
+  });
 
   if (sale.sellerId === 2) sale.sellerId = 'Fulana Pereira';
   const handleClick = (status) => {
@@ -24,7 +32,7 @@ function OrderDetails(props) {
       setLoading(false);
     };
     getOrder();
-  }, [sale.status]);
+  }, [sale.status, id]);
 
   const { products } = sale;
   const dataTestids = 'customer_order_details__element-order-';

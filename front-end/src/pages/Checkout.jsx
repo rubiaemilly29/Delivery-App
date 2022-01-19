@@ -18,7 +18,6 @@ function Checkout() {
   const pedidos = Object.entries(ordersObj)
     .map((arr) => ({ id: arr[0], ...arr[1] }));
   const history = useHistory();
-  console.log('pedidos:', pedidos);
   const list = () => pedidos.map((item, index) => (
     <tr key={ index } className="total">
       <CheckoutList item={ item } index={ index } />
