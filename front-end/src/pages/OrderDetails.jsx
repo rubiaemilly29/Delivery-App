@@ -20,7 +20,7 @@ function OrderDetails(props) {
   const handleClick = async (status) => {
     const newSale = { ...sale, status };
     setSale(newSale);
-    socket.emit('sale', newSale);
+    socket.emit('entregue', newSale);
     const newOrder = { id: sale.id, status };
     await updateOrder(newOrder);
   };

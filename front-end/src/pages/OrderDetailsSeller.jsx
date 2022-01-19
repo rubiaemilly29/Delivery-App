@@ -12,6 +12,11 @@ function OrderDetails(prop) {
   const [loading, setLoading] = useState(true);
   const { match: { params: { id } } } = prop;
 
+  socket.on('entregue', (newSale) => {
+    console.log(newSale);
+    if (newSale !== undefined) setSale(newSale);
+  });
+
   if (sale.sellerId === 2) sale.sellerId = 'Fulana Pereira';
   const handleClick = async (status) => {
     const newSale = { ...sale, status };

@@ -24,6 +24,10 @@ httpServer.listen(PORT, () => console.log(' ### ', `Api rodando na porta ${PORT}
 io.on('connection', (socket) => {
   socket.on('sale', (sale) => {
     console.log(sale);
-  socket.broadcast.emit('sale', sale)
+    socket.broadcast.emit('sale', sale)
+  });
+  socket.on('entregue', (sale) => {
+    console.log(sale);
+    socket.broadcast.emit('entregue', sale)
   })
 })
