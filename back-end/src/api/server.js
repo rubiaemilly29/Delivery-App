@@ -13,19 +13,19 @@ const PORT = process.env.API_PORT || 3001;
 
 httpServer.listen(PORT, () => console.log(' ### ', `Api rodando na porta ${PORT}`));
 
- const io = socket(httpServer, {
-    cors: {
-        origin: 'http://localhost:3000',
-    },
+const io = socket(httpServer, {
+   cors: {
+       origin: 'http://localhost:3000',
+   },
+   
   });
-
-io.on('connection', (socket) => {
-  socket.on('sale', (sale) => {
+io.on('connection', (socketIo) => {
+  socketIo.on('sale', (sale) => {
     console.log(sale);
-    socket.broadcast.emit('sale', sale);
+    socketIo.broadcast.emit('sale', sale);
   });
-  socket.on('entregue', (sale) => {
+  socketIo.on('entregue', (sale) => {
     console.log(sale);
-    socket.broadcast.emit('entregue', sale);
+    socketIo.broadcast.emit('entregue', sale);
   });
 });
