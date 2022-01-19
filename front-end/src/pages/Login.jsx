@@ -32,7 +32,8 @@ function Login() {
     <>
       <span className="logo">TRYBE</span>
       <p>
-        e-mail fulana@deliveryapp.com e senha fulana@123
+        e-mail fulana@deliveryapp.com e senha fulana@123 e-mail
+        zebirita@email.com e senha $#zebirita#$
       </p>
       <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
         Glass

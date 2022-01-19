@@ -25,7 +25,6 @@ const createSaleProduct = async ({ saleId, productId, quantity }) => {
     productId,
     quantity,
   });
-  console.log('newSaleProduct:', newSaleProduct);
   return newSaleProduct;
 };
 

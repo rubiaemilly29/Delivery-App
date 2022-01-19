@@ -7,7 +7,7 @@ const sellerRouter = express.Router();
 sellerRouter.get('/orders/:id', rescue(async (req, res) => {
   const { id } = req.params;
   const sale = await getSaleById(id);
-
+  console.log('back =>>', sale);
   return res.status(200).json(sale);
 }));
 
@@ -15,7 +15,7 @@ sellerRouter.put('/orders/update', rescue(async (req, res) => {
     const { id, status } = req.body;
 
     await updateSale(id, status);
-
+    
     res.status(200).json(status);
   }));
 

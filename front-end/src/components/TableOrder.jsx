@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3001');
 
 function TableOrders(props) {
+  const [myStatus, setStatus] = useState('');
   const dez = 10;
   const zero = 0;
   const { item, user } = props;
   const { id, status, saleDate, totalPrice } = item;
+
+  socket.on('sale', (newSale) => {
+    console.log(newSale);
+    if (newSale.id === id) setStatus(newSale.status);
+  });
+
+  socket.on('entregue', (newSale) => {
+    console.log(newSale);
+    if (newSale.id === id) setStatus(newSale.status);
+  });
+
+  useEffect(() => {
+    setStatus(status);
+    console.log(myStatus);
+  }, [status]);
 
   const date = saleDate.slice(zero, dez).split('-').reverse().join('/');
 
@@ -18,7 +37,7 @@ function TableOrders(props) {
             {id}
           </td>
           <td data-testid={ `${user}_orders__element-delivery-status-${id}` }>
-            {status}
+            {myStatus}
           </td>
           <td>
             <tr data-testid={ `${user}_orders__element-order-date-${id}` }>
