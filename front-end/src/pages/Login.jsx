@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
-import rockGlass from '../images/rockGlass.svg';
 import ErrorLogin from '../components/ErrorLogin';
 import Context from '../context/Context';
 
@@ -9,7 +8,7 @@ function Login() {
   const [isDisable, setIsDisable] = useState(true);
   const user = localStorage.getItem('user');
   const {
-    errorMsg, handleClickLogin, email, password, setEmail, setPassword,
+    errorMsg, loginFnc, email, password, setEmail, setPassword,
   } = useContext(Context);
 
   useEffect(() => {
@@ -29,55 +28,45 @@ function Login() {
   }, [email, password, setIsDisable]);
 
   return user ? <Redirect to="/customer/products" /> : (
-    <>
-      <span className="logo">TRYBE</span>
-      <p>
-        e-mail fulana@deliveryapp.com e senha fulana@123 e-mail
-        zebirita@email.com e senha $#zebirita#$
-      </p>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-      <form action="">
-        <label htmlFor="loginInput">
-          Login
-          <input
-            type="email"
-            name="loginInput"
-            placeholder="email@trybeer.com.br"
-            data-testid="common_login__input-email"
-            onChange={ ({ target }) => setEmail(target.value) }
-          />
-        </label>
-        <label htmlFor="passwordInput">
-          Senha
-          <input
-            type="password"
-            name="passwordInput"
-            placeholder="***********"
-            data-testid="common_login__input-password"
-            onChange={ ({ target }) => setPassword(target.value) }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="common_login__button-login"
-          disabled={ isDisable }
-          onClick={ () => handleClickLogin(history) }
-        >
-          LOGIN
-        </button>
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-        >
-          <Link to="/register">
-            Ainda não tenho conta
-          </Link>
-        </button>
-        { errorMsg ? <ErrorLogin /> : '' }
-      </form>
-    </>
+    <form action="">
+      <label htmlFor="loginInput">
+        Login
+        <input
+          type="email"
+          name="loginInput"
+          placeholder="email@trybeer.com.br"
+          data-testid="common_login__input-email"
+          onChange={ ({ target }) => setEmail(target.value) }
+        />
+      </label>
+      <label htmlFor="passwordInput">
+        Senha
+        <input
+          type="password"
+          name="passwordInput"
+          placeholder="***********"
+          data-testid="common_login__input-password"
+          onChange={ ({ target }) => setPassword(target.value) }
+        />
+      </label>
+      <button
+        type="button"
+        data-testid="common_login__button-login"
+        disabled={ isDisable }
+        onClick={ () => loginFnc(history) }
+      >
+        LOGIN
+      </button>
+      <button
+        type="button"
+        data-testid="common_login__button-register"
+      >
+        <Link to="/register">
+          Ainda não tenho conta
+        </Link>
+      </button>
+      { errorMsg ? <ErrorLogin /> : '' }
+    </form>
   );
 }
 

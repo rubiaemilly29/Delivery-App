@@ -6,15 +6,18 @@ import setToken from '../utils/token';
 import { createUser } from '../services/user';
 
 function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
   const history = useHistory();
 
   const {
     errorMsg,
     setErrorMsg,
+    name,
+    setName,
+    password,
+    setPassword,
+    email,
+    setEmail,
   } = useContext(Context);
 
   const handleClickRegister = async () => {
