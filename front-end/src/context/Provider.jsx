@@ -14,15 +14,17 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderIdCheckout, setOrderIdCheckout] = useState(0);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const [sales, setSales] = useState([]);
 
   const setToken = (token) => {
     localStorage.setItem('user', JSON.stringify(token));
   };
 
-  const handleClickLogin = async (history) => {
+  const loginFnc = async (history) => {
     if (!email || !password) setErrorMsg(true);
 
     try {
@@ -71,12 +73,16 @@ function Provider({ children }) {
     total,
     hidden,
     orderIdCheckout,
+    name,
     email,
     password,
+    role,
     sales,
     setSales,
+    setName,
     setEmail,
     setPassword,
+    setRole,
     setTotal,
     setHidden,
     setCarrinho,
@@ -85,7 +91,7 @@ function Provider({ children }) {
     setUsers,
     setOrderIdCheckout,
     getUsers,
-    handleClickLogin,
+    loginFnc,
   };
 
   return (

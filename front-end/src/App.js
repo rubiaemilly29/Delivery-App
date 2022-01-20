@@ -9,11 +9,13 @@ import SellerOrders from './pages/SellerOrders';
 import OrdersDetails from './pages/OrderDetails';
 import Checkout from './pages/Checkout';
 import OrdersDetailsSeller from './pages/OrderDetailsSeller';
+import AdmManager from './pages/AdmManager';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/admin/manage" component={ AdmManager } />
         <Route exact path="/customer/orders" component={ OrdersCustomer } />
         <Route exact path="/seller/orders" component={ SellerOrders } />
         <Route exact path="/customer/checkout" component={ Checkout } />

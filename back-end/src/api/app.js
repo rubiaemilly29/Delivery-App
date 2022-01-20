@@ -5,7 +5,7 @@ const { customerRouter } = require('../controllers/customer');
 const { registerRouter } = require('../controllers/register');
 const { userRouter } = require('../controllers/users');
 const { sellerRouter } = require('../controllers/seller');
-// const { administratorRouter } = require('../controllers/administrator');
+const administratorRouter = require('../controllers/adm');
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use('/customer', customerRouter);
 
 app.use('/seller', sellerRouter);
 
-// app.use('/admin', administratorRouter);
+app.use('/admin', administratorRouter);
 
 app.get('/', (_req, res) => res.redirect('/login'));
 
